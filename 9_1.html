@@ -1,0 +1,40 @@
+﻿
+  <style>
+    div.drag{background-repeat: no-repeat; background-size:100% 100%;background-position: center; border: 1px solid black;margin-left: 10px;margin-top: 4px;}
+    div.drag, div.text{position: absolute;}
+    div.text{font-family: Arial, Helvetica, sans-serif; font-size: 1em;text-align: center;}
+  </style>
+    <div class="text">
+      Цветы, как люди, на добро щедры<br>
+      И, щедро нежность людям отдавая,<br>
+      Они цветут, сердца отогревая,<br>
+      Как маленькие теплые костры...
+    </div>
+    <div class="first"></div>
+    <script>
+      jQuery(function(){
+        // div.first size
+        $('div.first').width(wC).height(hC-4);
+        //div.text
+        var topV=$('div.first').offset().top;
+        var leftV=$('div.first').offset().left;
+        $('div.text').width(wC-(wC/5-10)*2).height(hC/5-10);
+        $('div.text').css({'top':(hC/5*2+topV)+'px','left':(wC/5+leftV)+'px'});
+        var topVi1;
+        var topVi2;
+        var leftVi2=leftV+wC-wC/5-10;
+        for (var img_ind10=0; img_ind10<5; img_ind10++){
+          $('div.first').append('<div id="img'+img_ind10+'" class="drag"></div>');
+          topVi1=img_ind10*(hC/5)+topV;
+          $('div.first div#img'+img_ind10).css({'background-image':'url('+foto[4][img_ind10].src+')','top': topVi1+'px','left':leftV+'px'});
+        }
+        for (var img_ind11=5; img_ind11<10; img_ind11++){
+          $('div.first').append('<div id="img'+img_ind11+'" class="drag"></div>');
+          topVi2=(img_ind11-5)*(hC/5)+topV;
+          $('div.first div#img'+img_ind11).css({'background-image':'url('+foto[4][img_ind11].src+')','top': topVi2+'px','left':leftVi2+'px'});//'left':leftVi2
+        };
+        $('div.drag').width(wC/5-10).height(hC/5-10);
+        $('div.drag').resizable().draggable();
+        $('div.drag').draggable("option","cursor","move").draggable("option","zIndex",20).draggable("option","containment","parent");
+      })
+    </script>

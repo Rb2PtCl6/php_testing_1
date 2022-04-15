@@ -1,0 +1,91 @@
+﻿
+  <style>
+    div.first_inp{text-align: center;vertical-align: middle; overflow: hidden;}
+    div.first{text-align: center;}
+  </style>
+  <div class="first">
+    <div class="first_inp">
+  <input type="button" value="1" id="inp1" class="inp">
+  <input type="button" value="2" id="inp2" class="inp">
+  <input type="button" value="3" id="inp3" class="inp">
+  <input type="button" value="4" id="inp4" class="inp">
+  </div>
+    <div>
+      <img>
+    </div>
+    <div>
+      <img>
+    </div>
+    <div>
+      <img>
+    </div>
+    <div>
+      <img>
+    </div>
+  </div>
+    <script>
+      var n=0; //flag
+      jQuery(function(){
+        // div size
+        $('div.first').width(wC).height(hC);
+        $('div.first_inp').height('30px');
+        $('div.first div:gt(0)').height(hC-34);
+        $('div.first div').width(wC-2);
+        
+        var wiN=(wC-2)/3*2;
+        var hiN=wiN/2;
+        // img src
+        for (var i=0; i<4; i++){
+         $('div.first img:eq('+i+')').attr('src',foto[4][i].src).attr('alt',i).css({'width':wiN,'height':hiN,});};
+        $('div.first div:gt(0) img').css({'margin-top':'20px'});
+        $('div.first div:gt(1)').hide();
+        $('div.first div.first_inp input.inp').click(function(){
+          if (n==1) return;
+          n=1;
+          $('div.first div:gt(0)').hide();
+          //click defenitition
+          var in1=this.id;
+          var ind1=$('input.inp#'+in1).index();
+          $('div.first div:eq('+(ind1+1)+')').show();
+          // img defenision
+          var anm=$('div.first div:eq('+(ind1+1)+') img');
+          // animation switch
+          switch (ind1){
+           case 0:
+           // case 0(1) масштабирование изображения
+           anm.stop().clearQueue().animate({'width':'90%','height':'90%','opacity':'0.5'},2000).delay(1000).animate({'width':wiN+'px','height':hiN+'px','opacity':'1.0'},2000,function(){n=0});
+           break;
+           case 1:
+           // case 1(2) эффект toggle
+           anm.stop().clearQueue().animate({'height':'toggle'},2000)
+           .animate({'width':'toggle'},2000,function(){n=0});
+           break;
+           case 2:
+           // case 2(3) эффект растворения для изображения
+           var pt=anm.offset().top;
+	       var pl=anm.offset().left;
+           anm.stop().clearQueue()
+           .css({'position':'absolute','top':pt,'left':pl}).animate({'opacity':'0.0','width':wiN*5,'height':hiN*5,'top':pt-(hiN*5/2),'left':pl-(wiN*5/2)},2000,function(){anm.css({'width':wiN,'height':hiN,'position':'static','top':pt,'left':pl,'opacity':'1.0'});n=0});
+           break;
+           case 3:
+            n=0; 
+           // case 3(4) эффект движения изображения
+           var t=$('DIV.first DIV:eq(4)').offset().top;
+           var l=$('DIV.first DIV:eq(4)').offset().left;
+           anm.stop().clearQueue()
+           .animate({'height':(hiN/2),'width':(wiN/2),'opacity':'0.0',},1000,function(){anm.css({'position':'absolute','margin-top':'20px','margin-left':0,'top':t,'left':l,'z-index':1})})
+           .delay(100)
+           .animate({'height':(hiN/2),'width':(wiN/2)},1000,function(){anm.css({'position':'absolute','margin-top':'20px','margin-left':0,})})
+           .animate({'opacity':'1.0','margin-top':hC-hiN/2-30},1000)
+           .animate({'opacity':'0.0','margin-left':wC-wiN/2},1000)
+           .animate({'opacity':'1.0','margin-top':'20px'},1000)
+           .animate({'opacity':'0.0','margin-left':'0'},1000,function(){anm.css({'position':'static','z-index':'0'})})
+           .animate({'height':(hiN),'width':(wiN),'opacity':'1.0'},1000,function(){n=0})
+           break;
+           //closing switch
+         }
+         //closing click
+        })
+      //closing code
+      })
+    </script>

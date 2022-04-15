@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<HTML>
+  <HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  <TITLE>Index page</TITLE>
+  <link rel="icon" href="./lightbox/ico92x92.png" type="image/png">
+  <script src="./js/jquery-1.8.3.min.js"></script>
+  <script src="./video01/js1/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="./video01/css/jquery-ui.min.css">
+  <script src="js/my.js"></script>
+  <style>
+    body, html{padding:0;margin:0;overflow:hidden}
+    div#my{border:solid 0px black;}
+    table{border:1px; border-collapse:collapse;padding:0;margin:0;}
+    table#big {width:100%; height:100%;}
+    td.header,td.footer {height:15%;vertical-align:middle;}
+    td.header{text-align:center}
+    td.left, td.right {width:15%;text-align:center;vertical-align:top;}
+    iframe#frameB{padding:0;margin:0;width:100%;height:100%;overflow:hidden;border:0px;}
+    div.pageT{padding:0;margin:0;width:100%;height:100%}
+    /* td color
+    td.header,td.footer {background-color: aliceblue;}
+    td.left, td.right {background-color: azure;}
+    td.center{background-color:#F1F1F1}*/
+  </style>
+  </HEAD>
+  <BODY>
+    <div id="my">
+      <table id="big">
+        <tr>
+          <td class="header" colspan="3">
+            <input type="button" value="Page1" class="page" id="page1">
+            <input type="button" value="Page2" class="page" id="page2">
+            <input type="button" value="Page3" class="page" id="page3">
+            <input type="button" value="Page4" class="page" id="page4">
+            <input type="button" value="Page5" class="page" id="page5">
+            <input type="button" value="Page6" class="page" id="page6">
+            <!--<input type="button" value="Page7" class="page" id="page7">-->
+          </td>
+        </tr>
+        <tr>
+          <td class="left"></td>
+          <td class="center">
+            <div class="pageT">
+              <iframe id="frameB"></iframe>
+            </div>
+          </td>
+          <td class="right"></td>
+        </tr>
+        <tr>
+          <td class="footer" colspan="3"></td>
+        </tr>
+      </table>
+    </div>
+    <script>
+      //div size
+      var div=document.getElementById('my');
+      div.style.width=wT+'px';
+      div.style.height=h+'px';
+      div.style.marginLeft=((w-wT)/2)+'px';
+      //frameB size
+      document.body.onload=function(){
+        var frameB=document.getElementById('frameB');
+        frameB.style.height=100+'%';
+        frameB.style.width=100+'%';
+        frameB.src="1_3.html";
+      };
+      //jquery
+      jQuery(function(){
+        //adding ui
+        //$('body').addClass('ui-widget-overlay');
+        $('table#big').addClass('ui-widget-content');
+        $('td.header').addClass('ui-widget-header');
+        $('td.footer').addClass('ui-widget-header');
+        $('.ui-widget-header').css({'font-weight':'normal'})
+		$('input[type=button]').button();
+        //rename tab
+        //$('title').empty();
+        //$('title').append('Nikita Gromov');
+        //adding in header
+        $('td.header').prepend('<div><span>Сайтопостроение</span></div>');
+        $('td.header div').height('50%').css({'text-align':'center'});
+        $('td.header div span').css({'font-size':'0.0em','color':'rgb(252, 178, 3)','font-family':'arial'}).animate({'font-size':'2.5em'},2000);
+        //adding in left
+        var wIMG1=$('td.left').width();
+        var hIMG1=wIMG1/2;
+        var i0=1;
+        var nFLAG0=0;
+        $('td.left').prepend('<div><img></div>');
+        var to_img=$('td.left div:eq(0) img');
+        to_img.attr('src',foto[3][0].src).width(wIMG1).height(hIMG1);
+        to_img.css({'margin-top':'10px'});
+        to_img.mouseover(function(){
+          if (nFLAG0==1) return;
+          nFLAG0=1;
+          to_img.hide();
+          if(i0<foto[3].length){
+            to_img.attr('src',foto[3][i0].src);
+            i0=i0+1;
+          }
+          else{
+            to_img.attr('src',foto[3][0].src);
+            i0=1;
+          }
+          to_img.fadeIn('slow',function(){nFLAG0=0});
+        });
+        //adding in right
+        var wIMG2=$('td.right').width();
+        var hIMG2=wIMG2/2;
+        var i1=1;
+        var nFLAG1=0;
+        $('td.right').prepend('<div><img></div>');
+        var to_img1=$('td.right div:eq(0) img');
+        to_img1.attr('src',foto[2][0].src).width(wIMG2).height(hIMG2);
+        to_img1.css({'margin-top':'10px'});
+        to_img1.mouseover(function(){
+          if (nFLAG1==1) return;
+          nFLAG1=1;
+          to_img1.hide();
+          if(i1<foto[2].length){
+            to_img1.attr('src',foto[2][i1].src);
+            i1=i1+1;
+          }
+          else{
+            to_img1.attr('src',foto[2][0].src);
+            i1=1;
+          }
+          to_img1.fadeIn('slow',function(){nFLAG1=0});
+        });
+        //click function
+        var pageT=$("div.pageT");
+        $("input.page").click(function(){
+          pageT.empty();
+          switch (this.id){
+            case "page1":
+              pageT.append("<iframe id='frameB' src='1_3.html'></iframe>");
+              $("iframe#frameB").width(wC).height(hC);
+              break;
+            case "page2":
+              pageT.load('4_1.html');
+              break;
+            case "page3":
+              pageT.load('5_1.html');
+              break;
+            case "page4":
+              pageT.load('7_1.html');
+              break;
+            case "page5":
+              pageT.load('8_2.html');
+              break;
+            case "page6":
+              pageT.load('video01/video_test_5.html');
+              break;
+            //case "page7":
+              //pageT.append("<iframe id='frameB' src='_no_v3_h.html'></iframe>");
+              //$("iframe#frameB").width(wC).height(hC);
+              //break;
+          }//closing switch
+        })//closing click
+      })//closing jqury
+    </script>
+  </BODY>
+</HTML>

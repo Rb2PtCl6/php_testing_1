@@ -1,0 +1,138 @@
+﻿<!DOCTYPE HTML>
+<HTML>
+  <HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  <TITLE></TITLE>
+  <script src="./js/jquery-1.8.3.min.js"></script>
+  <style>
+    body,html{ margin: 10px;font-family: Arial, Helvetica, sans-serif; font-size: 18px;}
+    table{border: 1px solid black; width: 80%;}
+    td{width: 50%;text-align: center;}
+    table input{width: 80%;}
+    .count{width: 80%;}
+    #lamb{width: 80%;}
+  </style>
+  <script>
+    var max_num=prompt("Max amount of td")
+  </script>
+  </HEAD>
+  <BODY>
+    <table>
+      <tr>
+        <td>l, cm</td>
+        <td>x, cm</td>
+      </tr>
+      <tr>
+        <td id="l_col">
+          <script>
+            for (var td=0;td<max_num;td++){
+              jQuery('td#l_col').append('<input type="text" name="" class="l_td">')
+            }
+          </script>
+        </td>
+        <td id="x_col">
+          <script>
+            for (var td1=0;td1<max_num;td1++){
+              jQuery('td#x_col').append('<input type="text" name="" class="x_td">')
+            }
+          </script>
+        </td>
+      </tr>
+    </table>
+    <input type="text" value="Lambda" id="lamb">
+    <input type="button" value="Count all numbers" class="count">
+    <br>
+    <script>
+      var l_cm=new Array;
+      var x_cm=new Array;
+      var rez=Math.pow(10,-2);
+      var rez1=Math.pow(10,-9);
+      var rez2=Math.pow(10,-6);
+      var lamb;
+      var count1=0;
+      var count2=0;
+      var sin_f;
+      var dk_l_mm;
+      var dk_m;
+      var dk_l_mm_arr=new Array;
+      var dk_m_arr=new Array;
+      //console.log(((500.9131603275762*Math.pow(10,-9))/0.15027394809827285)/Math.pow(10,-6));
+      //console.log(Math.pow(10,-3)/(3.3*Math.pow(10,-6)))
+      jQuery(function(){
+        //$('input.l_td').attr('value',50);$('input.x_td').attr('value',9.6);$('#lamb').attr('value',628.5)
+        $('input.count').click(function(){
+          for (var i=0;i<max_num;i++){
+            l_cm[i]=$('input.l_td:eq('+i+')').attr('value');
+            x_cm[i]=$('input.x_td:eq('+i+')').attr('value');
+          };
+          lamb=$('input#lamb').attr('value');
+          for (var j=0;j<max_num;j++){
+            sin_f=x_cm[j]*rez/(Math.sqrt(Math.pow(l_cm[j]*rez,2)+Math.pow(x_cm[j]*rez,2)));
+            dk_m=((lamb*rez1)/sin_f)/rez2;
+            dk_m_arr[j]=dk_m;
+            dk_l_mm=Math.pow(10,-3)/(dk_m*rez2);
+            dk_l_mm_arr[j]=dk_l_mm;
+            $('body').append('No: ');
+            $('body').append(j);
+            $('body').append(', sin_f: ');
+            $('body').append(sin_f);
+            $('body').append(', dk_m: ');
+            $('body').append(dk_m);
+            $('body').append('x10<sup>-6</sup>, dk_l_mm: ');
+            $('body').append(dk_l_mm);
+            $('body').append('<br>');
+            //$('body').append(cotent)
+          };
+          for (var t=0;t<max_num;t++){
+            count1=count1+dk_m_arr[t];
+          };
+          count1=count1/max_num;
+          for (var p=0;p<max_num;p++){
+            count2=count2+dk_l_mm_arr[p];
+          };
+          count2=count2/max_num;
+          $('body').append('dk in meters<sub>vid</sub>: ',count1,'x10<sup>-6</sup>')
+          $('body').append('<br>')
+          $('body').append('dk in lines/mm<sub>vid</sub>: ',count2)
+          $('body').append('<br>')
+        })
+      })
+      //dif_cof=lamb/
+      /*var l_cm=[50,40,30,20,10];
+      var xr_cm=[9.6,7.8,6.5,3.9,2.0];
+      var xg_cm=[7.6,6.4,4.9,3.2,1.4];
+      var lamb_r_med=new Array;
+      var lamb_g_med=new Array;
+      var count=0;
+      var sin_f;
+      var rez=Math.pow(10,-2);
+      var dif_cof=Math.pow(10,-3)/300;
+      var lamb;
+      console.log(dif_cof)
+      for (var i=0;i<5;i++){ // red
+        sin_f=xr_cm[i]*rez/(Math.sqrt(Math.pow(l_cm[i]*rez,2)+Math.pow(xr_cm[i]*rez,2)));
+        lamb=sin_f*dif_cof*Math.pow(10,9);
+        lamb_r_med[i]=lamb;
+        console.log('No(r): ',i,', sin_f: ',sin_f,', lamb: ',lamb)
+      }
+      for (var j=0;j<5;j++){
+        count=count+lamb_r_med[j];
+      }
+      count=count/5;
+      console.log('lamb_r_med: ',count);
+      count=0;
+      for (var i=0;i<5;i++){ // green
+        sin_f=xg_cm[i]*rez/(Math.sqrt(Math.pow(l_cm[i]*rez,2)+Math.pow(xg_cm[i]*rez,2)));
+        lamb=sin_f*dif_cof*Math.pow(10,9);
+        lamb_g_med[i]=lamb;
+        console.log('No(g): ',i,', sin_f: ',sin_f,', lamb: ',lamb)
+      }
+      for (var j=0;j<5;j++){
+        count=count+lamb_g_med[j];
+      }
+      count=count/5;
+      console.log('lamb_g_med: ',count);
+      count=0;*/
+    </script>
+  </BODY>
+</HTML>

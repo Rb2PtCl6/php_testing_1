@@ -1,0 +1,17 @@
+﻿
+  <script src="./js/jquery.nivo.slider.pack.js"></script>
+  <link rel="stylesheet" href="./css/nivo-slider.css">
+    <div class="nivoSlider"></div>
+    <script>
+      jQuery(function(){
+        $('div.nivoSlider').width(wT*0.15);
+        for (var i=0;i<foto[4].length;i++){
+          $('div.nivoSlider').append(foto[4][i]);
+        }
+        $('div.nivoSlider').nivoSlider({
+          controlNav: false,
+          pauseOnHover: false,
+          directionNav: false
+        })
+      })
+    </script>

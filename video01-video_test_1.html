@@ -1,0 +1,202 @@
+﻿<!DOCTYPE HTML>
+<HTML lang="en" class="html1">
+  <HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  <TITLE>Dynamic size</TITLE>
+  <link rel="icon" href="./video01/ico92x92.png" type="image/png">
+  <script src="./video01/js1/current-device.min.js"></script>
+  <!--<script src="./js1/playerjs(no_pl).js"></script>-->
+  <!--<script src="./video01/js1/playerjs-pleer-13-t10-16.6nwpn.js"></script>-->
+  <script src="./video01/js1/playerjs-pleer-13-t10-ael-yes16.10.js"></script>
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script src="./video01/js1/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="./video01/css/jquery-ui.min.css">
+  <script>
+    var re='DaL_video_new/';// path to video
+    var ra='.mp4';// extension
+	var list1=new Array; // video names without extension and path
+    list1[0]='『デート・ア・ライブ』 オープニング映像｜10周年記念！シリーズＯＰ映像リバイバル配信！';
+    list1[1]='『デート・ア・ライブⅡ』 オープニング映像｜10周年記念！シリーズＯＰ映像リバイバル配信！';
+    list1[2]='『デート・ア・ライブⅢ』 オープニング映像｜10周年記念！シリーズＯＰ映像リバイバル配信！';
+    list1[3]='Date A Live III - Ending｜Last Promise';
+    list1[4]='Date A Live Season 3 OST - AHIH (Origami Battle Theme)';
+    list1[5]='Date A Live Season 3 OST - Wedding March (Origami Theme)';
+    // poster array
+    var list2=new Array;
+    for (var t=0;t<6;t++){
+      list2[t]=new Image;
+      list2[t].src='./video01/images/image'+(t+1)+'.png'
+    }
+    // links on video
+    var link_list=new Array;
+    link_list[0]="https://drive.google.com/uc?export=download&id=1v22_YIN0hQNpe6MUOjmWTLYwRr-aWYyk";
+    link_list[1]="https://drive.google.com/uc?export=download&id=1pm70Guc5seUrqhlRjFHQs4DHtG-QQERL";
+    link_list[2]="https://drive.google.com/uc?export=download&id=1KLvIPR7CLpHHdImhBG3bMrTem9DvO-vi";
+    link_list[3]="https://drive.google.com/uc?export=download&id=1Ff2saPtIUjbsV6qu7vR_BvZG-aiPyM9z";
+    link_list[4]="https://drive.google.com/uc?export=download&id=1QMp9Rd13rExBymaDgynh-xdqfgzUWg4I";
+    link_list[5]="https://drive.google.com/uc?export=download&id=1x0x3-4Z9bEswIKxMYX3CjRtTsZsUzBeO";
+  </script>
+  <style>
+    body, html{padding: 0;margin: 0;}
+    div.text1{font-family: Arial, Helvetica, sans-serif; font-size: 1.2em;margin-bottom: 10px; text-align: center;padding: 5px;}
+    div.inp1{margin-top: 10px; border: 0px; text-align: left;}
+    div.inp1 input{margin: 3px;}
+    div.part1{font-family: Arial, Helvetica, sans-serif; font-size: 1em; margin: 5px;}
+    div.part2{margin: 3px;}
+  </style>
+  </HEAD>
+  <BODY>
+    <center><div class="main">
+      <div class="inp1">
+        <input type="button" value="Opening 1" id="but1" class="inp first_i">
+        <input type="button" value="Opening 2" id="but2" class="inp first_i">
+        <input type="button" value="Opening 3" id="but3" class="inp first_i">
+        <input type="button" value="Ending 3" id="but4" class="inp second_i">
+        <input type="button" value="AHIH" id="but5" class="inp second_i">
+        <input type="button" value="Wedding March" id="but6" class="inp second_i">
+      </div>
+      <div id="player1" class="player1"></div>
+      <div class="text1"></div>
+      <center>
+        <div class="text2">
+          <div class="part1">Текущее cостояние автозапуска / Выбранный набор видео / Автозапуск следущего видео / Loop 1 video</div>
+          <div class="part2">
+            <input type="button" value="Отключено" class="but but10">
+            <input type="button" class="but" disabled value="/">
+            <input type="button" value="1" class=" but but11">
+            <input type="button" class="but" disabled value="/">
+            <input type="button" value="Отключено" class=" but but12">
+            <input type="button" class="but" disabled value="/">
+            <input type="button" value="0" class=" but but13">
+          </div>
+        </div>
+      </center>
+    </div>
+    </center>
+      <script>
+        var player= new Playerjs({id:"player1",file:[
+          {"file":link_list[0],"poster":list2[0].src,"id":"v1"},
+          {"file":link_list[1],"poster":list2[1].src,"id":"v2"},
+          {"file":link_list[2],"poster":list2[2].src,"id":"v3"},
+          {"file":link_list[3],"poster":list2[3].src,"id":"v4"},
+          {"file":link_list[4],"poster":list2[4].src,"id":"v5"},
+          {"file":link_list[5],"poster":list2[5].src,"id":"v6"},
+        ]
+        });
+        player.api('volume',0.8);
+        player.api('find','v1');
+        jQuery(function(){
+          // main
+          var ww=document.documentElement.clientWidth;
+          var hh=document.documentElement.clientHeight;
+          $('body').addClass('ui-widget-content');
+          $('input[type=button].inp').button();
+          $('input[type=button].but').button();
+          $('div.inp1').addClass('ui-widget-header');
+          $('div.text1').addClass('ui-widget-header');
+          $('div.text2').addClass('ui-widget-header').addClass('ui-corner-all');
+          $('div.part1').css({'text-align':'center'});
+          $('div.part2').css({'text-align':'center'});
+          $('.ui-widget-header').css({'font-weight':'normal'});
+          $('div.text1').addClass('ui-corner-bottom');
+          $('div.inp1').addClass('ui-corner-top');
+          $('div.player1').width('100%');
+          $('div.text1').append(list1[0]);
+          // adaptable player size
+          if ($('html.html1').hasClass('mobile')==true || $('html.html1').hasClass('tablet')==true){
+            $('div.main').width(ww*0.995);
+            $('div.text2').width(ww*0.8);
+          }
+          else{
+            $('div.main').width(ww*0.6);
+            $('div.text2').width((ww*0.6)-2);
+          };
+          // autolaunch
+          var n_text='preload'
+          $('input.but10').click(function(){
+            if (n_text=='preload'){
+              n_text='play';
+              $('input.but10').attr('value','Включено');
+              } 
+            else{
+              n_text='preload';
+              $('input.but10').attr('value','Отключено');
+              };
+          });
+          // video collections
+          $('input.second_i').hide();
+          var vid_col=0;
+          $('input.but11').click(function(){
+            if (vid_col==0){
+              $('input.but11').attr('value','2');
+              $('input.first_i').hide();
+              $('input.second_i').show();
+              vid_col=1;
+            }
+            else{
+              $('input.but11').attr('value','1');
+              $('input.second_i').hide();
+              $('input.first_i').show();
+              vid_col=0;
+            }
+          });
+          // click on input
+          $('input.inp').click(function(){
+            var ind=$('div.inp1 input.inp').index(this);
+            if (player.api('playlist_id')=='v'+(ind+1)) return;
+            player.api('find','v'+(ind+1));
+            player.api(n_text);
+            $('div.text1').empty().append(list1[ind]);
+          });
+          // looped 1 video
+          var loop_stat_0=0;
+          $('input.but13').click(function(){
+            if (loop_stat==1){ // avoid problems 1
+              loop_stat=0;
+              player.api('autonext',0);
+              player.api('playlistloop',0);
+            $('input.but12').attr('value','Отключено');
+            }
+            if (loop_stat_0==0) {
+              $('input.but13').attr('value','1');
+              loop_stat_0=1;
+            } 
+            else {
+              $('input.but13').attr('value','0');
+              loop_stat_0=0;
+            }
+            player.api('loop',loop_stat_0);
+          });
+          // looped all videos
+          var loop_stat=0;
+          player.api('autonext',0);
+          player.api('playlistloop',0);
+          $('input.but12').click(function(){
+            if (loop_stat_0==1){ // avoid problems 0
+              loop_stat_0=0;
+              player.api('loop','0');
+              $('input.but13').attr('value','0');
+            }
+            if (loop_stat==0) {
+              $('input.but12').attr('value','Включено');
+              loop_stat=1;
+            } 
+            else {
+              $('input.but12').attr('value','Отключено');
+              loop_stat=0;
+            }
+            player.api('autonext',loop_stat);
+            player.api('playlistloop',loop_stat);
+          })
+          var stat;
+          var stat1;
+          $('div#player1').on('new',function(){
+            stat=player.api('playlist_id');
+            stat1=stat.slice(1);
+            $('div.text1').empty().append(list1[stat1-1]);
+          })
+          //player.api('volume',0);
+        })
+      </script>
+  </BODY>
+</HTML>

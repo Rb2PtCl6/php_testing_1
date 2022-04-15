@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<HTML>
+  <HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  <style type="text/css">
+  BODY{padding:0;margin:0;}
+  div{border-radius:50%; border:solid 1px black; text-align:center;}
+  div#first{background-color:lightblue;}
+  div.new{background-color:orange;width:79%;height:79%;margin:10%;}
+  div#new7{background-image: url(images/sun.gif);background-repeat:no-repeat;background-size:100%;}
+  </style>
+  <script src="js/my.js"></script>
+  <script language="javascript">
+  var DIVcolor=new Array;
+  DIVcolor[0]="yellow";
+  DIVcolor[1]="orange";
+  DIVcolor[2]="purple";
+  DIVcolor[3]="gray";
+  DIVcolor[4]="pink";
+  DIVcolor[5]="lightgray";
+  DIVcolor[6]="black";
+  DIVcolor[7]="white";
+
+  var WH=wh;
+  var n=0;
+  var div;
+  function start(){
+    if (WH<=80 && n==0) n=1;
+    if (WH>=wh && n==1) n=0;
+    if (n==1) WH=WH+5;
+    else WH=WH-5;
+    div.style.width=WH+'px';
+    div.style.height=WH+'px';
+    div.style.marginTop=((h-WH)/2)+'px';
+    setTimeout("start()",100)
+  };
+  </script>
+  <TITLE></TITLE>
+  </HEAD>
+  <BODY onload="start()">
+  <center>
+<div id="first">
+<script language="javascript">
+div=document.getElementById('first');
+div.style.width=wh+'px';
+div.style.height=wh+'px';
+div.style.marginTop=((h-wh)/2)+'px';
+for (var i=0;i<8;i++){
+if (i<7)
+document.write('<div class="new" style="background-color:'+DIVcolor[i]+'">');
+else
+document.write('<div class="new" id="new7" style="background-color:'+DIVcolor[i]+'">');
+}
+for (var i=0; i<9; i++)
+document.write('</div>');
+</script>
+</div>
+</center>
+  </BODY>
+</HTML>

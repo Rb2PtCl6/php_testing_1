@@ -1,0 +1,72 @@
+﻿<!DOCTYPE HTML>
+<HTML>
+  <HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  <TITLE></TITLE>
+  <script src="./video01/js1/jquery-3.6.0.min.js"></script>
+  <script src="./js/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="./css/jquery-ui.min.css">
+  <script src="./datatables/js2/datatables.min.js"></script>
+  <link rel="stylesheet" href="./datatables/css2/datatables.min.css">
+  <script src="./js/my.js"></script>
+  <script src="./datatables/imagesArray.js"></script>
+  <script src="./lightbox/js/lightbox.js"></script>
+  <link rel="stylesheet" href="./lightbox/css1/lightbox.css">
+  <style>
+    /*body, html{overflow: hidden;}*/
+    tr.group,div.total{font-family: Arial, Helvetica, sans-serif;font-size: 18px; font-weight: bold;}
+    div.lightboxOverlay{overflow: hidden;}
+    div.total{padding: 20px;}
+  </style>
+  </HEAD>
+  <BODY>
+    <center>
+      <div class="main">
+        <table id="table1" class="display"></table>
+        <div class="total">Всего выбрано рядов: <span class="totalN">0</span></div>
+      </div>
+    </center>
+    <script>
+      var groupColumn=1;
+      $(document).ready(function() {
+        $('div.main').width(w*0.5).height(h*0.7);
+        $('#table1').width("100%").height("100%").DataTable({
+          data: arrOfImg,
+          "scrollY":"400px",
+          "scrollCollapse":true,
+          "padding":false,
+          "displayLength":25,
+          "columnDefs":[
+            {"visible":false,"targets":groupColumn}
+          ],
+          "order":[[groupColumn,"asc"]],
+          "drawCallback": function(settings){
+            var api=this.api();
+            var rows=api.rows( {page:'current'} ).nodes();
+            var last=null;
+            api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+              if ( last !== group ) {
+                $(rows).eq( i ).before('<tr class="group"><td colspan="3">'+group+'</td></tr>');
+                last=group
+              }
+            })
+          },
+          columns:[
+            {title:"id",data:"id"},
+            {title:"group_id",data:"group_id"},
+            {title:"atl",data:"alt"},
+            {title:"image",data:"image"}
+          ]
+        });
+        $('#table1 tbody').on('click','tr',function(){
+          $(this).toggleClass('selected')
+        });
+        $('div.fg-toolbar:eq(0)').removeClass('ui-widget-header').addClass('ui-widget-content');
+        $('div.total').addClass('ui-widget-content');
+        $('#table1').on('click',function(){
+          $('span.totalN').empty().append($('#table1').DataTable().rows('.selected').data().length)
+        })
+      })
+    </script>
+  </BODY>
+</HTML>

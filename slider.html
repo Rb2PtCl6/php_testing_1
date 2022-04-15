@@ -1,0 +1,74 @@
+﻿<!DOCTYPE HTML>
+<HTML>
+  <HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  <TITLE></TITLE>
+  <script src="./js/jquery-1.8.3.min.js"></script>
+  <script src="./js/jquery-ui.min.js"></script>
+  <script src="./js/multizoom.js"></script>
+  <link rel="stylesheet" href="./css/multizoom.css">
+  <script src="./js/my.js"></script>
+  <link rel="stylesheet" href="./css/jquery-ui.min.css">
+  <style>
+    div.main{text-align: center;}
+    div#custom-handle{text-align: center;}
+    div#dialog{overflow: hidden;}
+    img#img{cursor: pointer;}
+  </style>
+  </HEAD>
+  <BODY>
+    <center><div class="main">
+      <img id="img">
+      <center><div id="slider">
+        <div id="custom-handle" class="ui-slider-handle"></div>
+      </div></center>
+    </div></center>
+    <div id="dialog" title="Zoomed image">
+    </div>
+    <script>
+      var value=0;
+      jQuery(document).ready(function($){
+        $('div.main').width(wC).height(hC-30).css({'margin-top':'30px'});
+        $('img#img').attr('src',foto[4][0].src).width(wC*0.7).height(wC*0.35);
+        $('div#custom-handle').width('21px').height('21px');
+        $('div#slider').css({'margin-top':'5px'}).width(wC*0.7).height('13px').slider({
+          range:'min',
+          min:0,
+          max:foto[1].length-1,
+          step:1,
+          create:function(){
+            $('#custom-handle').text(value+1);
+          },
+          slide:function(event, ui){
+            value=ui.value;
+            $('#custom-handle').text(value+1);
+            $('img#img').attr('src',foto[4][value].src);
+          }
+        })
+        $('#dialog').dialog({
+          width:wC*0.85,
+          height:wC*0.4,
+          autoOpen:false,
+          modal:true,
+        })
+        $('img#img').click(function(){
+          $('#dialog').dialog('open');
+          $('img#image1').attr('src',foto[1][value].src);
+          $('#dialog').append('<img id="image1" src="'+foto[4][value].src+'" style="width:'+wC*0.5+'px;height:'+wC*0.25+'px">');
+          $("#image1").addimagezoom({
+            zoomrange: [3, 10],
+            magnifiersize:[wC*0.25,wC*0.25],
+            magnifierpos: "right",
+            cursorshade: true,
+            largeimage: foto[4][value].src
+          })
+        })
+        $('#dialog').on('dialogclose',function(event, ui){
+          $('div.zoomtracker').remove()
+          $('div.featuredimagezoomerhidden').remove()
+          $('#dialog').empty()
+        });
+      })
+    </script>
+  </BODY>
+</HTML>

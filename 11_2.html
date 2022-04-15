@@ -1,0 +1,40 @@
+﻿<!DOCTYPE HTML>
+<HTML>
+  <HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  <TITLE></TITLE>
+  <script src="./js/jquery-1.8.3.min.js"></script>
+  <script src="./js/jquery-ui.min.js"></script>
+  <script src="./js/jquery.featureCarousel.js"></script>
+  <link rel="stylesheet" href="./css/featureCarousel.css">
+  <link rel="stylesheet" href="./css/jquery-ui.min.css">
+  <script src="./js/my.js"></script>
+  <style>
+    body, html{margin: 0; padding: 0;}
+  </style>
+  </HEAD>
+  <BODY>
+    <center><div id="featureCarousel"></div></center>
+    <script>
+      jQuery(function(){
+        $('div#featureCarousel').width(w).height(h).css({'background':'none'});
+        for (var i=0; i<foto[1].length; i++){
+          $('div#featureCarousel').append('<div class="feature"><a href="#"></a><div><p>Picture '+i+'</p></div></div>');
+          $('a:eq('+i+')').append(foto[1][i]);
+        }
+        $('div#featureCarousel').featureCarousel({
+          largeFeatureWidth:wh,
+          largeFeatureHeight:wh/2,
+          smallFeatureWidth:wh/2,
+          smallFeatureHeight:wh/4,
+          topPadding:100,
+          autoPlay:1,
+          carouselSpeed:1500,
+        });
+        document.body.onload=function(){
+          $('#featureCarousel .blipsContainer').css({'top':(h*0.9)+'px','background-color':'#0d8df3'}).addClass('ui-corner-all');
+        }
+      })
+  </script>
+  </BODY>
+</HTML>

@@ -1,0 +1,47 @@
+﻿<!DOCTYPE HTML>
+<HTML>
+  <HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  <TITLE></TITLE>
+  <script src="./js/jquery-1.9.0.min.js"></script>
+  <script src="./js/jquery.mb.thumbGallery.js"></script>
+  <link rel="stylesheet" href="./css/thumbGrid.css">
+  <script src="./js/my.js"></script>
+  <script src="./images_sc/images_sc_arr.js"></script>
+  <style>
+    body, html{padding: 0; margin: 0;min-width: 100%;min-height: 100%;position: relative;}
+    .tg-overlay label {color: aliceblue;}
+  </style>
+  </HEAD>
+  <BODY>
+    <div class="imgGrid" id="imgGrid"></div>
+    <script>
+      jQuery(function(){
+        if (w<h){
+          $('div.imgGrid').attr('data-gallery_fullscreenw','90%').attr('data-gallery_fullscreenh',(w*0.9)/16*9)
+        }
+        else if (w>h){
+          $('div.imgGrid').attr('data-gallery_fullscreenh','90%').attr('data-gallery_fullscreenw',(h*0.9)/9*16)
+        };
+        for(var i=0;i<20;i++){
+          $('div.imgGrid').append('<img src="'+thumbarr[i].src+'" alt="img'+i+'" data-highres="'+fullarr[i].src+'" data-caption="img'+i+'">')
+        };
+        jQuery("#imgGrid").thumbGrid({
+          thumbgrid:true,
+          nav_effect:"slideInverse",
+          nav_delay:60,
+          nav_timing:400,
+          nav_pagination:3,
+          gallery_effectnext:"fadeIn",
+          gallery_effectprev:"fadeOut",
+          gallery_cover:true
+        });
+        jQuery.thumbGrid.transitions.fadeIn = {in: {x:"0", opacity:0, scale:0.9}, out: {x:0, opacity:0}};
+        jQuery.thumbGrid.transitions.fadeOut = {in: {x:"0", opacity:0}, out: {x:0, scale:0.9, opacity:0}};
+        jQuery.thumbGrid.transitions.slideLeft = {in: {x:$(window).width(), opacity:0}, out: {x:0, opacity:0}};
+        jQuery.thumbGrid.transitions.slideRight = {in: {x:0, opacity:0}, out: {x:$(window).width(), opacity:0}};
+      });
+      
+    </script>
+  </BODY>
+</HTML>

@@ -1,0 +1,111 @@
+﻿
+  <style>
+    div.first{font-size:0.75em}
+  </style>
+  <div class="first">
+  <!-- Слон -->
+  <div>
+  <img>
+  <h3>Слон</h3>
+  <p>
+  	Спать пора! Уснул бычок,<br>
+	Лег в коробку на бочок.<br>
+	Сонный мишка лег в кровать,<br>
+	Только слон не хочет спать.<br>
+	Головой кивает слон,<br>
+	Он слонихе шлет поклон.<br>
+  </p>
+  </div>
+  <!-- link 1 -->
+  <a href="#">Next</a>
+  <!-- Зайка -->
+  <div>
+  <img>
+  <h3>Зайка</h3>
+  <p>
+  	Зайку бросила хозяйка,—<br>
+	Под дождем остался зайка.<br>
+	Со скамейки слезть не мог,<br>
+	Весь до ниточки промок.<br>
+  </p>
+  </div>
+  <!-- link 2 -->
+  <a href="#">Back</a> &nbsp;<a href="#">Next</a>
+  <!-- Мишка -->
+  <div>
+  <img>
+  <h3>Мишка</h3>
+  <p>
+  	Уронили мишку на пол,<br>
+	Оторвали мишке лапу.<br>
+	Всё равно его не брошу<br>
+    Потому что он хороший.<br>
+  </p>
+  </div>
+  <!-- link 3 -->
+  <a href="#">Back</a>
+  <!-- div.first closing -->
+  </div>
+  <script>
+  jQuery(function(){
+  //  $('div.first').width(wC).height(hC); // отсутсвие этой строчки нормально ставит документ в индексном файле 
+  $('div.first').css({'padding':(hC*0.05)+'px '+(wC*0.1)+'px'});
+  //images src
+  for (var i=0; i<3; i++)
+  $('div.first img:eq('+i+')').attr('src',foto[3][i].src);
+  $('div.first img').attr('align','right');
+// hiding 
+  $('div.first div').hide();
+  $('div.first a').hide();
+  //showing first block
+  $('div.first div:eq(0)').show();
+  $('div.first a:eq(0)').show();
+ // close/open mechanism 
+  $('div.first a').click(function(){
+  var ind=$('div.first a').index(this);
+  switch (ind){
+  case 0:
+  $('div.first div:eq(1)').show();
+  $('div.first a:eq(0)').hide();
+  $('div.first a:eq(1)').show();
+  $('div.first a:eq(2)').show();
+  break;
+  case 1:
+  $('div.first div:eq(1)').hide();
+  $('div.first a:eq(0)').show();
+  $('div.first a:eq(1)').hide();
+  $('div.first a:eq(2)').hide(); 
+  break;
+  case 2:
+  $('div.first div:eq(2)').show();
+  $('div.first a:eq(3)').show();
+  $('div.first a:eq(1)').hide();
+  $('div.first a:eq(2)').hide();
+  break;
+  case 3:
+  $('div.first a:eq(3)').hide();
+  $('div.first a:eq(1)').show();
+  $('div.first a:eq(2)').show();
+  $('div.first div:eq(2)').hide();
+  break;
+  }
+  });
+  // mouseover 
+  $('div.first img').mouseover(function(){
+  var ind=$('div.first img').index(this);
+  var wIMG=$('div.first img:eq('+ind+')').width()*2;
+  var hIMG=$('div.first img:eq('+ind+')').height()*2;
+  var l=$('div.first img:eq('+ind+')').offset().left-wIMG/2;
+  $('div.first img:eq('+ind+')').css({'position':'absolute','left':l+'px','width':wIMG+'px','height':hIMG+'px',});
+  })
+  // mouseout 
+  $('div.first img').mouseout(function(){
+  var ind=$('div.first img').index(this);
+  var wIMG=$('div.first img:eq('+ind+')').width()/2;
+  var hIMG=$('div.first img:eq('+ind+')').height()/2;
+  $('div.first img:eq('+ind+')').css({'position':'static','width':wIMG+'px','height':hIMG+'px'});
+  })
+  //closing code
+  })
+  </script>
+

@@ -1,0 +1,57 @@
+﻿
+  <style>
+    table.one{border:0px;}
+  </style>
+  <div class="first">
+    <center>
+      <table  class="one"></table>
+    </center>
+  </div>
+  <script>
+  jQuery(function(){
+  $('div.first').width(wC).height(hC);
+  // cels
+  var kT=3;
+  var whT=wh/kT;
+  while (whT>100){
+  kT=kT+2;
+  whT=wh/kT-kT;
+  }
+  // stroki
+  var str;
+  for (var i=0; i<kT; i++){
+  str='<tr>';
+  for (var j=0; j<kT; j++){
+  str=str+'<td></td>';
+  }
+  str=str+'</tr>';
+  $('table.one').append(str)
+  };
+  // table
+  $('table.one').attr('align','center');
+  $('table.one td').width(whT).height(whT).attr('align','center');
+  $('table.one td:even').css({'background-color':'plum'});
+  $('table.one td:odd').css({'background-color':'powderblue'});
+  var fotoB= new Image;
+  fotoB.src='images/babochka1.gif';
+  var j=0;
+  for (var i=1; i<kT*kT; i=i+2){
+  $('table.one td:eq('+i+')').append('<img src='+foto[0][j].src+'>');
+  $('table.one td:eq('+i+')').append('<img src="'+fotoB.src+'">');
+  $('table.one td:eq('+i+') img:eq(1)').hide();
+  j++;
+  if (j>=foto[0].length) j=0;
+  };
+  $('table.one td img').width(whT-10).height(whT/2-5).css({'cursor':'pointer'});
+  // click
+  $('table.one td:odd').click(function(){
+  var ind=$('table.one td').index(this);
+  var ind1=$('table.one td:eq('+ind+') img:visible').index();
+  $('table.one td:eq('+ind+') img').hide();
+  if (ind1==0) ind1=1;
+  else ind1=0;
+  $('table.one td:eq('+ind+') img:eq('+ind1+')').show('slow');
+  })
+  // closing code
+  })
+</script>

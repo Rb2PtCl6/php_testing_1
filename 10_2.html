@@ -1,0 +1,81 @@
+﻿
+  <style>
+    div.lr {background-color:transporent; padding:10px 0;font-size:0.60em;overflow-y:auto; }
+    div#accordion {padding-top:5px;}
+    div.err_div{margin-top: 20px; padding: 0 0.7em; display: none;}
+    div.err_div span.ui-icon{float: left;margin-right: 0.3em;}
+  </style>
+    <div class="lr">
+      <center><input type="button" value="Введите N галереи" id="but"></center>
+      <div id="dialoG" title="Введите N галереи (от 0 до 5)">
+        <input type="text" id="spinner" value="0">
+        <div class="err_div ui-state-error ui-corner-all" id="no_num">
+          <p><span class="ui-icon ui-icon-alert"></span>
+            Галереи с таким номером не существует</p>
+        </div>
+        <div class="err_div ui-state-error ui-corner-all" id="no_num1">
+          <p><span class="ui-icon ui-icon-alert"></span>
+            Это не цифра, это что-то другое</p>
+        </div>
+        <div class="err_div ui-state-highlight ui-corner-all" id="this_num">
+          <p><span class="ui-icon ui-icon-info"></span>
+          Данная галерея уже открыта</p>
+        </div>
+      </div>
+      <div id="accordion"></div>
+    </div>
+    <script>
+      jQuery(function(){
+        $('div.lr').width(wT*0.15);
+        for (var i=0; i<10; i++){
+          $('div#accordion').append('<h3>Picture '+i+'</h3><div><center><img class="acord"></center></div>');
+          $('img.acord:eq('+i+')').attr('src',foto[0][i].src);
+        };
+        $('img.acord').width((wT*0.15)/2.3).height((wT*0.15)/4.6);
+        $('#accordion').accordion({collapsible: true});
+        $('#spinner').spinner();
+        $('div.lr input[type=button]').button().css({'padding-left':0,'padding-right':0,}).width(wT*0.15-20);
+        $('#but').click(function(){
+          $('#dialoG').dialog('open')
+        });
+        var c_gal=0;
+        var n_gal;
+        $('#dialoG').dialog({autoOpen:false,modal:true,buttons:{
+          OK:function(){
+            n_gal=$("#dialoG input").val();
+            if (n_gal==90) {
+              document.location.replace('r1.html');
+            }
+            else if (n_gal==c_gal) {
+              $("div.err_div").hide();
+              $('div#this_num').show();
+            }
+            else if (n_gal<0 || n_gal>5 || n_gal=="") {
+              $("div.err_div").hide();
+              $('div#no_num').show();
+            }
+            else if (n_gal>-1&&n_gal<6) {
+              c_gal=n_gal;
+              for (var i=0; i<10; i++)
+              $('img.acord:eq('+i+')').attr('src',foto[c_gal][i].src);
+              $('#dialoG').dialog("close");
+              $("div.err_div").hide();
+              $('#spinner').attr('value',c_gal);
+            }
+            else {
+              $('div#no_num1').show();
+            }
+          },
+          Cancel:function(){
+            $('#dialoG').dialog("close");
+            $('#spinner').attr('value',c_gal);
+            $("div.err_div").hide();
+            }
+        } 
+        });
+        $('#dialoG').on('dialogclose',function(event, ui){
+          $('#spinner').attr('value',c_gal);
+          $("div.err_div").hide();
+        });
+      })
+    </script>

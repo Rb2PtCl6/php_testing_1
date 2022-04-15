@@ -1,0 +1,23 @@
+﻿
+  <script src="./js/jquery.pikachoose.min.js"></script>
+  <link rel="stylesheet" href="./css/pikachoose.css">
+    <div class="firstR">
+      <div class="pikachoose">
+        <ul id="pikame"></ul>
+      </div>
+    </div>
+    <script>
+      jQuery(function(){
+        $('div.firstR').width(wT*0.15);
+        for (var i=0;i<foto[1].length;i++){
+          $('div.firstR ul#pikame').append('<li></li>');
+          $('div.firstR li:eq('+i+')').append(foto[1][i]);
+        }
+        $('#pikame').PikaChoose({
+          autoPlay:true,
+          speed: 3000,
+          showTooltips:false,
+          showCaption:false
+        });
+      })
+    </script>

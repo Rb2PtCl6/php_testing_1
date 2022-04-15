@@ -1,0 +1,37 @@
+﻿<!DOCTYPE HTML>
+<HTML>
+  <HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  <TITLE></TITLE>
+  <script src="./js/jquery-1.8.3.min.js"></script>
+  <script src="./js/multizoom.js"></script>
+  <link rel="stylesheet" href="./css/multizoom.css">
+  <script src="./js/my.js"></script>
+  </HEAD>
+  <BODY>
+    <div class="targetarea"><img alt="zoomable" id="multizoom1"></div>
+    <div class="multizoom1 thumbs"></div>
+    <script>
+      jQuery(document).ready(function($){
+        $('DIV.targetarea').css({'padding-left':'100px','padding-top':'10px'});
+        $('DIV.multizoom1').css({'padding-left':'100px','padding-top':'10px'});
+        $('img#multizoom1').attr('src',foto[5][0].src);
+        for (var i=0; i<foto[5].length;i++){
+          $('div.multizoom1').append('<a></a>');
+          $('div.multizoom1 a:eq('+i+')').append(foto[5][i]).attr('href',foto[5][i].src).attr('data-large',foto[5][i].src);
+          $('div.multizoom1 img:eq('+i+')').height('30px')
+        }
+        $('#multizoom1').addimagezoom({
+          imagevertcenter: true,
+          magvertcenter: true,
+          zoomrange: [3,10],
+          width:wh*1,
+          height:wh*0.5,
+          magnifiersize: [wh*0.5,wh*0.5],
+          cursorshade: true,
+          zIndex:1000,
+        })
+      })
+    </script>
+  </BODY>
+</HTML>

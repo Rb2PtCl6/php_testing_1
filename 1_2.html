@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<HTML>
+  <HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  <TITLE></TITLE>
+  <style>
+    BODY{padding:0;margin:0;}
+    div#a1{ border:solid 1px black; text-align:center; background-color: lightblue;cursor: pointer;}
+    div#a2{ border:solid 1px lightblue;background-color: lightblue; background-image: url(images/sun.gif);;background-repeat:no-repeat;background-size:100%;background-position: center;cursor: pointer; margin: 25%; height: 50%; width: 50%;};
+  </style>
+   <script src="js/my.js"></script>
+  <script>
+    var div;
+    function upsize(){
+      div=document.getElementById('a2');
+      div.style.width=wh-4+'px';
+      div.style.height=wh-4+'px';
+      div.style.margin=0;
+    };
+    function downsize(){
+      div=document.getElementById('a2');
+      div.style.width=wh/2+'px';
+      div.style.height=wh/2+'px';
+      div.style.margin='25%';
+    };
+    </script>
+  </HEAD>
+  <BODY><center>
+  <div id="a1">
+    
+    <div id="a2" onmouseover="upsize()" onmouseout="downsize()">
+      <script>
+        var div0=document.getElementById('a1');
+        div0.style.width=wh+'px';
+        div0.style.height=wh+'px';
+        div0.style.marginTop=((h-wh)/4)+'px';
+      </script>
+    </div>
+  </div>
+  </center>
+  </BODY>
+</HTML>

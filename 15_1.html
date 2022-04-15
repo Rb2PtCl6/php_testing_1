@@ -1,0 +1,97 @@
+﻿
+  <script src="./js/i18n/grid.locale-ru.js"></script>
+  <script src="./js/jquery.jqGrid.min.js"></script>
+  <link rel="stylesheet" href="./css/ui.jqgrid.css">
+  <script src="./js/slimbox2.js"></script>
+  <link rel="stylesheet" href="./css/slimbox2.css">
+  <script>
+    var mydata=new Array;
+    var arr;
+    var j1;
+    for (var j=0;j<60;j++){
+      mydata[j]=new Image;
+      if (j<10){
+        arr=0;
+        j1=j;
+      }
+      else if (j>9 && j<20) {
+        arr=1;
+        j1=j-10;
+      }
+      else if (j>19 && j<30) {
+        arr=2;
+        j1=j-20;
+      }
+      else if (j>29 && j<40) {
+        arr=3;
+        j1=j-30;
+      }
+      else if (j>39 && j<50){
+        arr=4;
+        j1=j-40;
+      }
+      else {
+        arr=5;
+        j1=j-50;
+      }
+      mydata[j].src=foto[arr][j1].src;
+      mydata[j].id=j+1;
+      mydata[j].alt='image0'+j1+'.jpg';
+      mydata[j].group_id='images'+arr;
+      mydata[j].image='<center><a href="'+foto[arr][j1].src+'" title="Picture '+j1+'" class="lightbox"><img src="'+foto[arr][j1].src+'" style="width:80px"></a></center>'
+    }
+  </script>
+  <style>
+    span.bold{font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: bold;}
+  </style>
+    <center>
+      <table id="list0"></table>
+      <div id="pager0"></div>
+    </center>
+    <script>
+      jQuery('#list0').jqGrid({
+        data:mydata,
+        datatype: "local",
+        height:hC-200,
+        width:wC*0.7,
+        colNames:['№','Folder','file','Image'],
+        colModel:[
+          {name:'id',index:'id',width:wC*0.2,sorttype:'int'},
+          {name:'group_id',index:'group_id',sortable: false, search: false},
+          {name:'alt',index:'alt',width:wC*0.3,summaryType:'count',summaryTpl:'<span class="bold">Всего:{0}</span>'},
+          {name:'image',index:'image',width:wC*0.3,sortable: false, search: false}
+        ],
+        multiselect: true,
+        rowNum:300,
+        sortname:'group_id',
+        footerrow: true,
+        viewrecords: true,
+        grouping: true,
+        //scroll: true,
+        groupingView:{
+          groupField:['group_id'],
+          groupSummary: true,
+          groupCollapse: true,
+          groupText:['<span class="bold">{0}</span>'],
+          groupColumnShow: false
+        },
+        pager:"#pager0",
+        caption:'Table with images',
+        onSelectRow: function(rowId){
+          var selectedRowsIds = $('#list0').jqGrid('getGridParam', 'selarrrow');
+          var total= 0;
+          $.each(selectedRowsIds, function(index, selectedRowId){
+            total++
+          })
+          $('#list0').jqGrid('footerData', 'set', {id:'Selected:',alt: total });
+        },
+        loadComplete: function(){
+          $('#list0').jqGrid('footerData','set',{id:'Selected:','alt':0});
+          $('a.lightbox').slimbox();
+        }
+      }).navGrid("#pager0",{
+        edit: false,
+        del: false,
+        add: false
+      })
+    </script>

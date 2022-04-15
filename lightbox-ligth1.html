@@ -1,0 +1,63 @@
+﻿<!DOCTYPE HTML>
+<HTML>
+  <HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  <link rel="icon" href="./lightbox/ico92x92.png" type="image/png">
+  <TITLE>ligth1</TITLE>
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script src="./js/jquery-ui.min.js"></script>
+  <script src="./lightbox/js/lightbox.js"></script>
+  <link rel="stylesheet" href="./lightbox/css1/lightbox.css">
+  <link rel="stylesheet" href="./css/jquery-ui.min.css">
+  <script>
+    var go='./lightbox/DaL_origami_fon/';
+    var exP='.png';
+    var exJ='.jpg';
+    var img_arr= new Array;
+    for (var i=0; i<26; i++){
+      img_arr[i]= new Image;
+    };
+    img_arr[0].src=go+'ne_origami_fon_1.png';
+    img_arr[1].src=go+'ne_origami_fon_pc_1.png';
+    for (var i=0; i<3; i++){
+      img_arr[2+i].src=go+'origami_angel_'+(1+i)+exJ;
+    }
+    for (var i=0; i<7; i++){
+      img_arr[5+i].src=go+'origami_fon_'+(1+i)+exP;
+    }
+    for (var i=0; i<8; i++){
+      img_arr[11+i].src=go+'origami_fon_pc_'+(1+i)+exP;
+    }
+    img_arr[19].src=go+'origami_fon_pc_9.jpg';
+    for (var i=0; i<6; i++){
+      img_arr[20+i].src=go+'origami_fon_pc_'+(10+i)+exP;
+    }
+  </script>
+  <style>
+    body, html{overflow: hidden;}
+  </style>
+  </HEAD>
+  <BODY>
+    <div class="main"></div>
+    <script>
+      jQuery(function(){
+        //$('div.main').append('<div class="image-row"><div class="image-set">');
+        var path;
+        var path1;
+        for (var i=0; i<img_arr.length; i++){
+          path=img_arr[i].src;
+          path1=path.substring(path.lastIndexOf('/')).slice(1);
+          $('div.main').append('<a class="a1"></a>')
+          $('a.a1:eq('+i+')').attr('data-lightbox','roadtrip').attr('data-title',path1).attr('href',img_arr[i].src).append(img_arr[i]);
+          $('div.main img:eq('+i+')').addClass('img1').attr('alt',i);
+        }
+        $('img.img1').height('80px');
+        $('div.div1').height('80px').width('340px');
+        //$('div.main').append('</div>')
+        lightbox.option({
+          //maxWidth:1000
+        })
+      })
+    </script>
+  </BODY>
+</HTML>

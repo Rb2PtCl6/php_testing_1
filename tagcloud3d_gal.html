@@ -1,0 +1,105 @@
+﻿<!DOCTYPE HTML>
+<HTML>
+  <HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  <TITLE></TITLE>
+  <script src="./js/jquery-1.8.3.min.js"></script>
+  <script src="./js/tagcloud.jquery.min.js"></script>
+  <script src="./lightbox/js/lightbox.js"></script>
+  <link rel="stylesheet" href="./lightbox/css1/lightbox.css">
+  <script src="./js/my.js"></script>
+  <script>
+    var loadImg= new Array;
+    var ar0;
+    var nm1;
+    for (var nm=0;nm<60;nm++){
+      loadImg[nm]=new Image;
+      if (nm<10){
+        ar0=0;
+        nm1=nm;
+      }
+      else if (nm>9 && nm<20) {
+        ar0=1;
+        nm1=nm-10;
+      }
+      else if (nm>19 && nm<30) {
+        ar0=2;
+        nm1=nm-20;
+      }
+      else if (nm>29 && nm<40) {
+        ar0=3;
+        nm1=nm-30;
+      }
+      else if (nm>39 && nm<50){
+        ar0=4;
+        nm1=nm-40;
+      }
+      else {
+        ar0=5;
+        nm1=nm-50;
+      }
+      loadImg[nm].src=foto[ar0][nm1].src;
+      loadImg[nm].alt='images'+ar0+'/image0'+nm1;
+    };
+    var sz;
+    if (w>h){
+      sz=h
+    }
+    else if (h>w) {
+      sz=w
+    }
+  </script>
+  <style>
+    html, body{padding: 0; margin: 0; overflow: hidden;}
+    div#tagcloud{font-size: 15px;font-family: Arial, Helvetica, sans-serif;border: 1px solid black;border-radius: 4px;}
+    div#tagcloud li{cursor: pointer;}
+    a, a:hover, a:visited, a:active{color: black;}
+    * {
+      resize: none;
+      border: none;
+      outline: none;
+      text-decoration: none;
+      padding: 0px;
+      margin: 0px;
+      list-style-type: none;
+    }
+  </style>
+  </HEAD>
+  <BODY>
+    <center>
+      <div id="tagcloud">
+        <ul></ul>
+      </div>
+    </center>
+    <script>
+      jQuery(function(){
+        for (var i=0;i<60;i++){
+          //$('div#tagcloud ul').append('<li><a href="'+loadImg[i].src+'"  data-title="'+loadImg[i].alt+'" data-lightbox="roadtrip">'+loadImg[i].alt+'</a></li>');
+          $('div#tagcloud ul').append('<li><a href="'+loadImg[i].src+'" data-title="'+loadImg[i].alt+'" data-lightbox="roadtrip1"><img src="'+loadImg[i].src+'"></a></li>');
+        };
+        $('div#tagcloud img').width('60px').height('30px');
+        $('#tagcloud').tagoSphere({
+          //height of sphere container
+			    height: sz*0.85,
+			    //width of sphere container
+			    width: sz*0.85+20,
+			    //radius of sphere
+			    radius: (sz*0.85)/3,
+			    //rotation speed
+			    speed: 0.25,
+			    //sphere rotations slower
+			    slower: 0.9,
+			    //delay between update position
+			    timer: 5,
+			    //dependence of a font size on axis Z
+			    fontMultiplier: 15,
+			    //tag css stylies on mouse over
+			    hoverStyle: {
+            border: 'none',
+            color: '#0b2e6f'
+          },
+        })
+      })
+    </script>
+  </BODY>
+</HTML>

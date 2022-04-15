@@ -1,0 +1,67 @@
+﻿<!DOCTYPE HTML>
+<HTML>
+  <HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  <TITLE></TITLE>
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script src="./js/xzoom.min.js"></script>
+  <link rel="stylesheet" href="./css/xzoom.min.css">
+  <script src="./js/my.js"></script>
+  <script src="./images_sc/images_sc_arr.js"></script>
+  <script src="./js/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="./css/jquery-ui.min.css">
+  <style>
+    div.xzoom-thumbs img{display: none;width: 100px;}
+    div.main{padding: 20px;margin: 0 auto;}
+  </style>
+  <script>
+    var num_fr_bt0=new Array;
+    var mn0=Math.floor(fullarr.length/4);
+    for (var t=0;t<mn0;t++){
+      num_fr_bt0[t]=4*t;
+    }
+  </script>
+  </HEAD>
+  <BODY>
+    <div class="main ui-corner-all">
+      <div class="inp-blc">
+        <input type="button" value="1" class="change_th">
+        <input type="button" value="2" class="change_th">
+        <input type="button" value="3" class="change_th">
+        <input type="button" value="4" class="change_th">
+        <input type="button" value="5" class="change_th">
+      </div>
+      <div class="xzoom-container">
+        <img class="xzoom3" alt="big image">
+        <div class="xzoom-thumbs"></div>
+      </div>
+    </div>
+    <script>
+      jQuery(function(){
+        $('div.xzoom-thumbs').css({'margin-top':'20px'})
+        $('div.main').width('533px').addClass('ui-widget-content');
+        for (var i=0;i<20;i++){
+          $('div.xzoom-thumbs').append('<a href="'+fullarr[i].src+'"><img class="xzoom-gallery3" src="'+thumbarr[i].src+'"  xpreview="'+thumbarr[i].src+'" title="'+fullarr[i].src+'"></a>')
+        };
+        $('img.xzoom3').attr('src',thumbarr[0].src).attr('xoriginal',fullarr[0].src)
+        $('.xzoom3, .xzoom-gallery3').xzoom({position: 'lens', lensShape: 'circle', sourceClass: 'xzoom-hidden'});
+        $('div.inp-blc').width('533px').css({'text-align':'center','margin-bottom':'20px','margin-top':'20px'});
+        $('input.change_th').button();
+        $('input.change_th:eq(0)').addClass('ui-state-hover');
+        function num_fr_bt(){
+          var n01=$('input.change_th').index(this);
+          $('input.change_th').removeClass('ui-state-hover');
+          $('input.change_th:eq('+n01+')').addClass('ui-state-hover');
+          $('div.xzoom-thumbs img').hide();
+          for (var k=num_fr_bt0[n01];k<num_fr_bt0[n01]+4;k++){
+            $('div.xzoom-thumbs img:eq('+k+')').show()
+          }
+        };
+        for (var f=0;f<4;f++){
+          $('div.xzoom-thumbs img:eq('+f+')').show()
+        };
+        $('input.change_th').click(num_fr_bt)
+      })
+    </script>
+  </BODY>
+</HTML>

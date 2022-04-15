@@ -1,0 +1,28 @@
+﻿
+    <div class="first">
+      <img>
+    </div>
+    <script>
+      jQuery(function(){
+        $('div.first').height(hC-60).width(wC).css({'padding-top':'60px','text-align':'center'});
+        $('div.first img').attr('src',foto[3][0].src).width(wh*0.8).height(wh*0.4);
+        var r_t_img=$('div.first img');
+        var img_ind0=1
+        r_t_img.mouseover(function(){
+          if (img_ind0<foto[3].length){
+            r_t_img.hide('fade',750,function(){
+              r_t_img.attr('src',foto[3][img_ind0].src);
+              img_ind0=img_ind0+1;
+              r_t_img.show('explode',750);
+            })
+          }
+          else{
+            r_t_img.hide('fade',750,function(){
+              r_t_img.attr('src',foto[3][0].src);
+              img_ind0=1;
+              r_t_img.show('explode',750);
+            })
+          }
+        })
+      })
+    </script>

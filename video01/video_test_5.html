@@ -1,0 +1,92 @@
+﻿
+  <!--<script src="video01/js1/playerjs(no_pl).js"></script>-->
+  <script src="./video01/js1/playerjs-pleer-13-t10-16.6nwpn.js"></script>
+  <script>
+    var re='video01/DaL_video_new/';// path to video
+    var ra='.mp4';// extension
+	var list1=new Array; // video names without extension and path
+    list1[0]='『デート・ア・ライブ』 オープニング映像｜10周年記念！シリーズＯＰ映像リバイバル配信！';
+    list1[1]='『デート・ア・ライブⅡ』 オープニング映像｜10周年記念！シリーズＯＰ映像リバイバル配信！';
+    list1[2]='『デート・ア・ライブⅢ』 オープニング映像｜10周年記念！シリーズＯＰ映像リバイバル配信！';
+    // poster array
+    var list2=new Array;
+    list2[0]=new Image;
+    list2[1]=new Image;
+    list2[2]=new Image;
+    list2[0].src='video01/images/image1.png';
+    list2[1].src='video01/images/image2.png';
+    list2[2].src='video01/images/image3.png';
+    // links on video
+    var link_list=new Array;
+    link_list[0]="https://drive.google.com/uc?export=download&id=1v22_YIN0hQNpe6MUOjmWTLYwRr-aWYyk";
+    link_list[1]="https://drive.google.com/uc?export=download&id=1pm70Guc5seUrqhlRjFHQs4DHtG-QQERL";
+    link_list[2]="https://drive.google.com/uc?export=download&id=1KLvIPR7CLpHHdImhBG3bMrTem9DvO-vi";
+  </script>
+  <style>
+    div.text1{font-family: Arial, Helvetica, sans-serif; font-size: 1.2em;margin-bottom: 10px; text-align: center;}
+    div.inp1{margin-top: 10px; border: 0px; text-align: left;}
+    div.inp1 input{margin: 3px;}
+    div.part1{font-family: Arial, Helvetica, sans-serif; font-size: 1em; margin: 5px;}
+    div.part2{margin: 3px;}
+  </style>
+  <center><div class="main">
+  <div class="inp1">
+    <input type="button" value="Opening 1" id="but1" class="inp">
+    <input type="button" value="Opening 2" id="but2" class="inp">
+    <input type="button" value="Opening 3" id="but3" class="inp">
+  </div>
+  <div id="player1" class="player1"></div>
+  <div class="text1"></div>
+  <center><div class="text2">
+    <div class="part1">Текущее cостояние автозапуска:</div>
+  <div class="part2"><input type="button" value="Отключено" class="but10"></div>
+  </div></center>
+</div></center>
+  <script>
+    var player= new Playerjs({id:"player1",file:[
+      {"file":link_list[0],"poster":list2[0].src,"id":"v1"},
+      {"file":link_list[1],"poster":list2[1].src,"id":"v2"},
+      {"file":link_list[2],"poster":list2[2].src,"id":"v3"}]
+    });
+    player.api('volume',0.8);
+    player.api('find','v1');
+    jQuery(function(){
+      // new
+      var ww=$('body').width();
+      //$('div.main').addClass('ui-widget-content');
+      $('input[type=button].inp').button();
+      $('input[type=button].but10').button();
+      $('div.inp1').addClass('ui-widget-header');
+      $('div.text1').addClass('ui-widget-header');
+      $('div.text2').addClass('ui-widget-header').addClass('ui-corner-all').width(wC*0.4);
+      $('div.part1').css({'text-align':'center'});
+      $('div.part2').css({'text-align':'center'});
+      $('.ui-widget-header').css({'font-weight':'normal'});
+      $('div.text1').addClass('ui-corner-bottom');
+      $('div.inp1').addClass('ui-corner-top');
+      // old
+      $('div.main').width(wC*0.68);
+      $('div.player1').width('100%');
+      $('div.text1').append(list1[0]);
+      // autolaunch
+      var n_text='preload'
+      $('input.but10').click(function(){
+        if (n_text=='preload'){
+          n_text='play';
+          $('input.but10').attr('value','Включено');
+          } 
+        else{
+          n_text='preload';
+          $('input.but10').attr('value','Отключено');
+          } ;
+      })
+      $('input.inp').click(function(){
+        var ind=$('div.inp1 input').index(this);
+        if (player.api('playlist_id')=='v'+(ind+1)) return;
+        player.api('find','v'+(ind+1));
+        player.api(n_text)
+        $('div.text1').empty().append(list1[ind]);
+      })
+    })
+  </script>
+

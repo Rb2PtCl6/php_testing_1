@@ -1,0 +1,31 @@
+﻿<!DOCTYPE HTML>
+<HTML>
+  <HEAD>
+  <META http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+  <TITLE></TITLE>
+  <script src="./js/jquery-1.8.3.min.js"></script>
+  <script src="./js/cloud-carousel.1.0.5.min.js"></script>
+  <script src="./js/slimbox2.js"></script>
+  <link rel="stylesheet" href="./css/slimbox2.css">
+  <script src="./js/my.js"></script>
+  <style>
+    body, html{margin: 0; padding: 0;}
+    div#carousel1{overflow: scroll;}
+  </style>
+  </HEAD>
+  <BODY>
+    <center><div id="carousel1"></div></center>
+    <script>
+      jQuery(function(){
+        $('div#carousel1').height(hC).width(wC);
+        for (var i=0; i<foto[0].length; i++){
+          $('div#carousel1').append('<a href="'+foto[0][i].src+'" title="Picture '+i+'" class="lightbox"><img class="cloudcarousel" src="'+foto[0][i].src+'" width="40%"></a>');
+        };
+        $('div#carousel1').CloudCarousel({
+          xPos:wC/2,yPos:hC/3,autoRotate:'left'
+        })
+        $('a.lightbox').slimbox()
+      })
+    </script>
+  </BODY>
+</HTML>

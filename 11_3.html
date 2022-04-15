@@ -1,0 +1,19 @@
+﻿
+  <link rel="stylesheet" href="./css/spacegallery.css">
+  <script src="./js/eye.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/spacegallery.js"></script>
+    
+  <div class="first"><div class="spacegallery"></div></div>
+    <script>
+      jQuery(function(){
+        $('div.first').height(hC).width(wC).css({'padding-top':'60px'});
+        $('div.spacegallery').width(wC).height(hC-60);
+        for (var i=0; i<foto[1].length; i++){
+          $('div.spacegallery').append(foto[5][i]);
+        };
+        $('div.spacegallery').spacegallery({
+          minScale:0, border:1
+        });
+      })
+    </script>

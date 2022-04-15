@@ -1,0 +1,41 @@
+﻿
+  <script src="./js/jquery.awesomeCloud-0.2.min.js"></script>
+  <script>
+    var words=['html','body','span','JavaScript','jQuery','div','css','append','appendTo','width','height','script','class','id','input','load','hide','show','var','for','switch','this','function','animate','jQueryUI','click','empty','remove','array','length','datepicker','accordion','margin','padding','spacegallery','ul','li','slimbox','pikachoose','pikame','my.js','MultiZoom','GalleryView','nivoSlider','index.html','wC','hC','img','return',':eq(i)']
+    function wordChoosing(){
+      var word=words[Math.floor(Math.random() * words.length)];
+      return word
+    }
+    function fontSize(){
+      var min=10;
+      var max=41;
+      var size=Math.random()*(max-min) + min;
+      return Math.floor(size)
+    }
+  </script>
+  <style>
+    div.wordcloud{cursor: pointer;}
+  </style>
+    <div id="wordcloud1" class="wordcloud"></div>
+    <script>
+      jQuery(function(){
+        for (var i=0;i<55;i++){
+          $('div.wordcloud').append('<span data-weight="'+fontSize()+'">'+wordChoosing()+'</span>')
+        }
+        $('div.wordcloud').width(wT).height(h*0.15).css({'text-align':'center'});
+        $("#wordcloud1").awesomeCloud({
+          "size" : {
+						"grid" : 16,
+						"normalize" : false
+					},
+					"options" : {
+						"color" : "random-light",
+						"rotationRatio" : 0.35,
+						"printMultiplier" : 3,
+						"sort" : "random"
+					},
+					"font" : "'Times New Roman', Times, serif",
+					"shape" : "square"
+        })
+      })
+    </script>
