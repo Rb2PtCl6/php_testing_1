@@ -27,8 +27,9 @@ $out1='Names: '.$name.' Strlen:'.$tfn.'<br>';
 print $out1;
 ?>
 <?php 
+$bnm=1;
 print '<br>';
-print $bnm=1;
+print $bnm++;
 print '<br>';
 print $bnm++;
 print '<br>';
@@ -41,12 +42,12 @@ print '<br>';
 print '<br>';
 print $bnm2=2;
 print '<br>';
-print $bnm2**2;
+print $bnm2*=2;
 print '<br>';
-print $bnm2**3;
+print $bnm2*=2;
 print '<br>';
-print $bnm2**4;
+print $bnm2*=2;
 print '<br>';
-print $bnm2**5;
+print $bnm2*=2;
 print '<br>';
 ?>
