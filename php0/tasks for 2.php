@@ -1,7 +1,4 @@
-<?php 
-//echo "Some number: ";
-//echo number_format(33333333333);
-?>
+
 <!--after part 2 -->
 <?php 
 print 'How are you?';
